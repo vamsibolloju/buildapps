@@ -1,0 +1,28 @@
+<ion-view title="Home" class="category-feeds-view">
+  <ion-content  class="splash">
+  
+  <div class="list"  ng-init="setInits()">
+<div class="list card" ng-repeat="message in messages">
+
+  <div class="item">
+
+    <h2> {{lang_strings.message}}{{message.order_id}} </h2>
+    <p>{{lang_strings.sentOn}} {{message.date}} </p>
+  </div>
+
+  <div class="item item-body">
+
+    <p >
+  {{lang_strings.yourMessage}}{{message.order_id}} {{lang_strings.hasBeen}} {{message.order_status|uppercase}}
+    </p>
+<br>
+
+  <a class="button icon-right ion-chevron-right button-small button-assertive" ng-click="goToOrder(message.order_id)">{{lang_strings.goToOrder}}</a>
+
+  </div>
+
+</div>
+</div>
+
+  </ion-content> 
+</ion-view>

@@ -1,0 +1,47 @@
+  <ion-modal-view >
+    <ion-header-bar>
+      <h1 class="title"> {{lang_strings.newAddress}} </h1>
+       <button class="button icon-left ion-close-circled" ng-click="closeAddModal()">{{lang_strings.close}}</button>     
+    </ion-header-bar>
+    <ion-content>
+      <form>
+      
+       <div class="list">
+			  <label class="item item-input item-floating-label">
+			    <span class="input-label">{{lang_strings.locationName}}</span>
+			    <input type="text" ng-model="newaddress.location_name" placeholder="Location Name">
+			  </label>
+
+			  <label class="item item-input item-floating-label">
+			    <span class="input-label">{{lang_strings.street}}</span>
+			    <input type="text" ng-model="newaddress.street" placeholder="Street">
+			  </label>
+
+			  <label class="item item-input item-floating-label">
+			    <span class="input-label">{{lang_strings.city}}</span>
+			    <input type="text" ng-model="newaddress.city" placeholder="City">
+			  </label>
+
+			  <label class="item item-input item-floating-label">
+			    <span class="input-label">{{lang_strings.state}}</span>
+			    <input type="text" ng-model="newaddress.state" placeholder="State">
+			  </label>
+
+			  <label class="item item-input item-floating-label">
+			    <span class="input-label">{{lang_strings.phoneNumber}}  </span>
+			    <input type="text" ng-model="newaddress.contact_phone" placeholder="Phone number">
+			  </label>
+			  
+			  <label class="item item-input item-floating-label">
+			    <span class="input-label">{{lang_strings.pinCode}}</span>
+			    <input type="text" ng-model="newaddress.zipcode" placeholder="Pincode">
+			  </label>
+			</div>
+			<button type="submit" ng-click="setNewAddress()" class="button  button-block button-positive">
+         {{lang_strings.setNewAddress}} 
+         </button>		
+
+      </form>
+		
+		</ion-content>
+  </ion-modal-view>  

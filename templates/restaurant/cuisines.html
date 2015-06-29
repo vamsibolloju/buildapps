@@ -1,0 +1,10 @@
+<div class="list">
+
+  <label ng-click="cuisineChanged(c)" class="item item-radio" ng-repeat="c in cuisines">
+    <input type="radio" name="group" ng-checked="cuisine.cuisine_id == c.cuisine_id">
+    <div class="item-content">
+      {{c.cuisine_name}} 
+    </div>
+    <i class="radio-icon ion-checkmark"></i>
+  </label>
+</div>

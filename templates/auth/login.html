@@ -1,0 +1,108 @@
+<ion-view class="login-view">
+  <ion-content scroll="true" ng-init="setInits()">
+    <div class="row">
+      <div class="col col-center">
+        <div class="list">
+        
+         <div class="card" ng-if="submitted && (loginvalidation.pswd.$invalid || loginvalidation.email.$invalid)">
+            <div class="item item-text-wrap  errorlist">
+               <ul ng-show="submitted && loginvalidation.pswd.$invalid" >
+                    <li ng-show="loginvalidation.pswd.$error.required">{{lang_strings.password}} {{lang_strings.isRequired}} </li>
+                </ul>
+                <ul ng-show="submitted && loginvalidation.email.$invalid" >
+                    <li ng-show="loginvalidation.email.$error.required">{{lang_strings.email}} {{lang_strings.isRequired}}</li>
+                </ul>
+             </div>
+          </div>
+          
+          <div class="card" ng-if="failerror">
+             <div class="item item-text-wrap errorlist">
+                <ul ng-show="failerror">
+                    <li> {{failerror}} </li>
+                </ul>
+             </div>   
+          </div>          
+      
+        <div class="card login-container" >
+                  <div id="header-logo">
+                     
+                  </div>
+                  <div class="item item-body bottom-content">
+                       <button type="submit" ng-click="facebookLogin()" class="button  facebook-button button-block" >
+                         <span class="facebook-icon"> <i class="icon ion-social-facebook"> </i>  </span>  {{lang_strings.login}}  {{lang_strings.withFB}}
+                       </button>
+
+<!--                       <button type="submit" ng-click="facebookLogout()" class="button  facebook-button button-block" >
+                         <span class="facebook-icon"> <i class="icon ion-social-facebook"> </i>  </span>  {{lang_strings.logout}} 
+                       </button>
+-->
+                 </div>
+         
+                  <form name="loginvalidation" class="" novalidate>
+        <div class="item item-body">
+                <div class="list">
+             <label class="item item-input item-floating-label" ng-class="{ 'field-error' : submitted && loginvalidation.email.$invalid }">
+                <span class="input-label"> {{lang_strings.email}}  </span>                
+                <input type="text" name="email" placeholder="Email" ng-model="email" required />
+            </label>
+
+            <label class="item item-input item-floating-label" >
+                <span class="input-label"> {{lang_strings.password}}  </span>                
+                  <input type="password" name="pswd" placeholder="Password" ng-model="password" required />
+            </label>
+                </div>
+         </div>
+            <div class="item item-body bottom-content">
+              <button type="submit" class="button button-positive button-block" ng-click="login(loginvalidation.$valid, email , password )">
+             {{lang_strings.login}}     
+              </button>
+               <div class="alternative-actions">
+          <button class="forgot-password button button-small button-clear button-light" ng-click="goToForgotPassword()">
+          {{lang_strings.forgot}}    {{lang_strings.password}} ?
+          </button>
+          </div>
+              <br>     
+              <button type="submit" class="button button-assertive button-block" ng-click="register()">
+             {{lang_strings.register}}    
+              </button>
+        
+            </div>
+          </form>
+        </div>
+       
+        </div>
+        
+      </div>
+    </div>
+  </ion-content>
+</ion-view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

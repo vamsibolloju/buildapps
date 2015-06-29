@@ -1,0 +1,142 @@
+
+<ion-view title="checkout">
+  <ion-content  class="splash"  ng-init="setInits()">
+ 
+ <div class="card" ng-if="submitted && ( valid.dtime.$invalid || valid.ddate.$invalid || sel_delivery_type != 'pickup' && sel_delivery_type != 'delivery' ) ">
+            <div class="item item-text-wrap errorlist" ng-if="submitted && ( valid.dtime.$invalid || valid.ddate.$invalid)">
+             
+                <ul ng-show="submitted && valid.dtime.$invalid" >
+                    <li ng-show="valid.dtime.$error.required">Select the delivery time</li>
+                </ul>
+                 <ul ng-show="submitted && valid.ddate.$invalid" >
+                    <li ng-show="valid.ddate.$error.required">Select the delivery date</li>
+                </ul>
+             </div>
+                <div class="item item-text-wrap errorlist" ng-show="sel_delivery_type != 'pickup' && sel_delivery_type != 'delivery' ">
+               <ul >
+                    <li >Select the delivery type</li>
+                </ul>
+                </div>
+          </div>
+
+       
+
+       
+<div class="list">
+			
+				  <div class="item item-divider">
+	                {{lang_strings.checkoutOptions}} 
+	           </div>
+
+						<form name="valid" novalidate>
+  
+
+			  <span class="item item-input" ng-class="{ 'field-error' : submitted && valid.delivery.$invalid }">
+			       {{lang_strings.deliveryType}}      
+			            
+                    <span class="row delivery-type" >
+                      <span class="col"></span>
+  			             <span   name="dtype"   required
+   class="col" ng-if="delivery_type.delivery" ng-click="setDeliveryType('delivery')"> 
+  			                <i class="icon ion-checkmark-circled"    ng-if="sel_delivery_type == 'delivery'"></i>
+              			    <i class="icon ion-ios-circle-outline"    ng-if="sel_delivery_type != 'delivery'"></i>              
+  			                {{delivery_type.delivery}}  
+  			             </span>
+                      <span  name="dtype"   required class="col" ng-if="delivery_type.pickup" ng-click="setDeliveryType('pickup')"> 
+  			                <i class="icon ion-checkmark-circled"    ng-if="sel_delivery_type == 'pickup'"></i>
+              			    <i class="icon ion-ios-circle-outline"  ng-if="sel_delivery_type != 'pickup'"></i>              
+                         {{delivery_type.pickup}}              
+  			             </span>
+  			             </span>
+                    			            
+</span>
+			
+
+			
+				  <label class="item item-input item-select" >
+				   <div class="input-label">
+			        {{lang_strings.deliveryDate}} 
+			      </div>
+               <input name="ddate" type="date"     ng-click="setDatePicker()" ng-change="dateChanged(delivery_date)" ng-model="delivery_date" required>
+             
+              </label>
+			
+				  <label class="item item-input item-select" ng-show="delivery_date">
+				   <div class="input-label">
+			     {{lang_strings.deliveryTime}}  
+			    </div>
+             <select name="dtime" ng-model="time" ng-options="time for time in starttime" required> 
+
+			     </select>
+				  </label>
+			 
+		
+     </form>
+     	  
+				  			</div>				
+
+<div class="item item-divider" ng-if="sel_delivery_type  == 'delivery'">
+ {{lang_strings.clientAddress}} 
+	           </div>
+    <div class="entries-list">
+         <div class="entry-content item item-text-wrap" ng-if="sel_delivery_type  == 'delivery'">
+
+          <p class="entry-excerpt" >
+				    {{user_address.location_name}} , {{user_address.street}} , {{user_address.city}}
+				    <p> {{user_address.contact_phone}} , {{user_address.zipcode}} </p>
+          </p>
+
+          <div class="entry-actions row">
+            <div class="bookmark col col-center col-40">
+            </div>
+            <div class="read-more col col-center col-60" >
+               <button style="float:right;" class="button button-small button-light activated" ng-if="newaddress.street" ng-click="setDefaultAddress()"> {{lang_strings.setDefaultAddress}} </button>   
+               <button style="float:right;" class="button button-small button-light activated" ng-if="!newaddress.street" ng-click="openAddModal()"> {{lang_strings.newAddress}}   </button>   
+            </div>
+          </div>
+        
+        </div>
+
+      </div>
+
+
+
+        <div class="item item-divider" >
+              {{lang_strings.paymentType}}  
+	           </div>
+
+					<div class="list list-inset">
+        
+				  <button class="button button-block button-positive item-icon-right" ng-click="placeOrder('cod',time,valid.$valid)"  ng-model="paymentype" ng-show="options.merchant_disabled_cod">
+               {{lang_strings.cod}} 
+               					   <i class="icon ion-chevron-right" style="color:#fff" ></i>
+	           </button>
+	             <button class="button button-block button-positive item-icon-right" ng-click="placeOrder('stp',time,valid.$valid)"  ng-model="paymentype" ng-show="options.stripe_enabled && options.stripe_connect_data ">
+				   {{lang_strings.stripe}} 
+				   					   <i class="icon ion-chevron-right" style="color:#fff"></i>
+	           </button>
+          
+           <div class="row">
+              <div class="col col-10">    
+                 <i class="icon ion-android-lock" style="font-size:60px;color:#000;"></i>
+		    	  </div>
+              <div class="col col-90" style="color:grey;">  
+                  La trasmissione delle informazioni di pagamento avviene secondo gli standard di 
+                  sicurezza più elevati ed è garantita da Stripe: i dati della tua carta di credito saranno totalmente inaccessibili a terzi.              
+               </div>
+                         
+           </div>            
+          
+   <!--       <a class="item item-icon-left" href="" style="border-color:#fff;">
+	               <i class="icon ion-android-lock" style="font-size:60px;color:#000;"></i>
+		    	      <p> La trasmissione delle informazioni di pagamento avviene secondo gli standard di sicurezza più elevati ed è garantita da Stripe: i dati della tua carta di credito saranno totalmente inaccessibili a terzi.<p>
+		    </a>  
+ -->
+            </div>
+      
+		
+
+		   
+   </ion-content> 
+</ion-view>
+

@@ -1,0 +1,151 @@
+<ion-view title="subtotal">
+  <ion-content ng-init="setInits()">
+
+ <div class="card" ng-if="submitted && (valid.dtype.$invalid || valid.dtime.$invalid || valid.ddate.$invalid)">
+            <div class="item item-text-wrap errorlist">
+               <ul ng-show="submitted && valid.dtype.$invalid" >
+                    <li ng-show="valid.dtype.$error.required">Select the delivery type</li>
+                </ul>
+                <ul ng-show="submitted && valid.dtime.$invalid" >
+                    <li ng-show="valid.dtime.$error.required">Select the delivery time</li>
+                </ul>
+                 <ul ng-show="submitted && valid.ddate.$invalid" >
+                    <li ng-show="valid.ddate.$error.required">Select the delivery date</li>
+                </ul>
+             </div>
+          </div>
+       
+<div class="list">
+			
+				  <div class="item item-divider">
+	               Checkout Options 
+	           </div>
+
+						<form name="valid" novalidate>
+  
+
+			  <span class="item item-input" ng-class="{ 'field-error' : submitted && valid.delivery.$invalid }">
+			         Delivery Type   
+			            
+                    <span class="row delivery-type">
+                      <span class="col"></span>
+  			             <span class="col" ng-if="delivery_type.delivery" > 
+  			                <i class="icon ion-checkmark-circled"  ng-click="setDeliveryType('')"  ng-if="sel_delivery_type == 'delivery'"></i>
+              			    <i class="icon ion-ios-circle-outline"  ng-click="setDeliveryType('delivery')"  ng-if="sel_delivery_type != 'delivery'"></i>              
+  			                {{delivery_type.delivery}} 
+  			             </span>
+                      <span class="col" ng-if="delivery_type.pickup"> 
+  			                <i class="icon ion-checkmark-circled"  ng-click="setDeliveryType('')"  ng-if="sel_delivery_type == 'pickup'"></i>
+              			    <i class="icon ion-ios-circle-outline"  ng-click="setDeliveryType('pickup')"  ng-if="sel_delivery_type != 'pickup'"></i>              
+                         {{delivery_type.pickup}}              
+  			             </span>
+  			             </span>
+                    			            
+</span>
+			
+<!--			     <select name="dtype" ng-model="dname" ng-change="typeChanged(dname)" ng-options="dname as value for (dname,value) in delivery_type" required>
+
+			     </select>
+-->			 
+  
+			
+				  <label class="item item-input item-select" >
+				   <div class="input-label">
+			        Delivery Date
+			      </div>
+               <input name="ddate" type="date"     ng-click="setDatePicker()" ng-change="dateChanged(delivery_date)" ng-model="delivery_date" required>
+             
+              </label>
+			
+				  <label class="item item-input item-select" ng-show="delivery_date">
+				   <div class="input-label">
+			      Delivery Time
+			    </div>
+             <select name="dtime" ng-model="time" ng-options="time for time in starttime" required> 
+
+			     </select>
+				  </label>
+				  
+				  			</div> 
+			<!--<div class="list">
+	        <div class="item item-divider">
+	           Sub Total 
+	        </div>
+			 <div class="item item-button-right">
+			    total
+			    <span class="badge badge-positive">
+			      <span ng-bind-html="curr"></span>{{total | prettyFilter:decimal:separator}}	
+			    </span>
+			  </div>
+			
+			  <div class="item item-button-right" ng-if="remove">
+			    Voucher Less
+			    <span class="badge badge-positive">
+			      <span ng-bind-html="curr"></span>{{voucher_less | prettyFilter:decimal:separator}}	
+			    </span>
+			  </div>
+			  
+			  <div class="item item-button-right" ng-if="options.merchant_delivery_charges != 0">
+			    Delivery Charges
+
+			    <span class="badge badge-positive">
+			      <span ng-bind-html="curr"></span>{{options.merchant_delivery_charges | prettyFilter:decimal:separator}}	
+			    </span>
+			  </div>
+			  
+			<!-- <div class="item item-button-right">
+			    Tax
+		
+			    <span class="badge badge-positive">
+			      <span ng-bind-html="curr"></span>{{tax | prettyFilter:decimal:separator}}	
+			    </span>
+			  </div>
+
+		  <div class="item item-button-right">
+			   Sub Total
+			    <span class="badge badge-positive">
+			      <span ng-bind-html="curr"></span>{{sub_total | prettyFilter:decimal:separator}}	
+			    </span>
+			  </div>
+			  
+				  <div class="item item-divider">
+				    Voucher 
+				  </div>
+			</div>-->				
+				
+
+
+
+      <!-- <div class="list list-inset" ng-if="options.merchant_enabled_voucher">
+            <div ng-if="!remove">
+				  <label class="item item-input">
+				    <input type="text" placeholder="coupen" ng-model="voucher_code">
+				  </label>
+				  <button class="button button-block button-positive" ng-click="usevoucher(voucher_code)">
+	             Use Voucher
+	           </button>
+            </div>
+           
+			  <button class="button button-block button-positive" ng-click="removeval()" ng-if="remove">
+             Remove Voucher
+           </button>
+       	</div>-->
+			
+						
+			         
+			<div class="list list-inset" ng-if="sell_limit">
+           <button class="button button-block button-positive" ng-if="is_merchant_open" ng-click="checkout(valid.$valid,delivery_date,dname,time)">
+             checkout
+           </button>
+           <button class="button button-block button-positive" ng-if="!is_merchant_open && options.merchant_preorder==='true'" ng-click="checkout(valid.$valid,delivery_date ,dname,time)">
+             pre order
+           </button>
+            <span ng-if="options.merchant_preorder==='false' && options.merchant_close_msg && !is_merchant_open"> {{options.merchant_close_msg}} </span>
+               <span ng-if="!options.merchant_close_msg && !is_merchant_open && options.merchant_preorder==='false'">This restaurant is closed now. Please check the opening times</span>
+         </div>  
+         				   <span class="list list-inset" ng-if="!sell_limit"> This merchant is not currently accepting orders </span>     				
+</form>				
+
+
+   </ion-content> 
+</ion-view>

@@ -1,0 +1,37 @@
+<ion-view title="Home" class="category-feeds-view">
+<ion-content class="splash">
+<div class="list"  ng-init="setInits()">
+   <div class="item item-divider search" > 
+      <span style="vertical-align:middle;">    <span > OrderHistory  </span> </span> 
+          
+
+      </div>
+<div class="list card" ng-repeat="order in orders">
+
+  <div class="item">
+
+    <h2>{{lang_strings.order}} {{order.order_id}} </h2>
+    <p>{{lang_strings.sentOn}} {{order.delivery_date}} </p>
+  </div>
+
+  <div class="item item-body">
+
+    <p>
+    {{lang_strings.yourOrder}}  {{order.order_id}} {{lang_strings.hasBeen}} {{order.status | uppercase}}
+    </p>
+
+  <a class="button icon-right ion-chevron-right button-small button-assertive" ng-click="goToOrder(order.order_id)">{{lang_strings.goToOrder}}</a>
+
+  </div>
+
+</div>
+
+
+  
+ 
+</div>
+
+</ion-content> 
+</ion-view>
+
+

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title> Mobyeat </title>
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/js/ionic.bundle.js"></script>
+    
+   <!-- push notifications -->
+	<script src="lib/ngCordova/dist/ng-cordova.js"></script>
+	<script src="lib/ionic-service-core/ionic-core.js"></script>
+	<script src="lib/ionic-service-push/ionic-push.js"></script>
+
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+    <!--    <script src="lib/cordova/cachecleaner.js"></script>  -->    
+
+    <!-- your app's js -->
+<!--      <script src="http://maps.googleapis.com/maps/api/js?libraries=places&sensor=false"></script>
+-->
+<!--    <script src="lib/autoaddress/autoaddress.js"></script> 
+-->
+    <script src="lib/angular/angular-payments.js"></script>
+    <script type="text/javascript" src="lib/payment/stripe.js"></script>
+
+
+    <script src="js/services/i18n.js"></script>
+    <script src="js/services/mobyeat.js"></script>
+    <script src="js/services/restapi.js"></script>
+    <script src="js/services/custom.js"></script>
+    <script src="js/services/factory.js"></script>
+    <script src="js/controllers/user.js"></script>
+    <script src="js/controllers/menu.js"></script>
+    <script src="js/controllers/restaurant.js"></script>
+    <script src="js/controllers/auth.js"></script>
+    <script src="js/router/app.js"></script>
+    
+<!--    <script src="http://maps.googleapis.com/maps/api/js?sensor=false"></script>
+-->    
+<!--    <script src="http://maps.google.com/maps/api/js?libraries=places"></script>
+-->
+    <script src="lib/ngmap/build/scripts/ng-map.min.js"></script>
+
+</head>
+
+<body ng-app="todo" style="opacity:1">
+    <ion-side-menus ng-controller="SideMenuCtrl" ng-init="setInits()">
+        <!-- Center content -->
+        <ion-side-menu-content>
+            <ion-header-bar class="bar-assertive">
+                <button class="button button-icon button-clear ion-navicon" ng-if="!backbtn" ng-click="toggleProjects()"> <!--{{lang_strings.title}}--> 
+                   <img style="vertical-align:middle;padding-left:3px;" src="img/logo.png" width="80" height="20" alt="">                
+                </button>
+                <button class="button button-icon button-clear ion-chevron-left" ng-if="backbtn" ng-click="goBack()"> {{lang_strings.back}} </button>
+<!--                <a ng-if="!currentuser" class="button"  ng-click="goToDefault('login')" href=""><i class="icon ion-log-in custom-icon"> </i> &nbsp; Login</a>-->
+<!--                <a ng-if="currentuser && !profilepage" class="button" ng-click="goToDefault('profile')" href=""> <i class="ion-person  custom-icon"> </i> &nbsp;  Hi {{currentuser.first_name}}</a>-->
+                <a ng-if="currentuser &amp;&amp; profilepage" class="button" ng-click="logout()" href=""> <i class="icon ion-log-out custom-icon"> </i> &#xA0;  Logout</a>
+
+                <!-- New Task button-->
+            </ion-header-bar>
+            <ion-header-bar class="bar-subheader bar-stable" ng-click="goBack()" data-ng-if="$state.includes(&apos;profile&apos;) || $state.includes(&apos;login&apos;) || $state.includes(&apos;register&apos;)">
+            <button class="button icon ion-chevron-left"> Back </button>
+            </ion-header-bar>
+                 <ion-content scroll="false">
+                           <div class="item item-text-wrap  errorlist" ng-if="networkerr">
+						               <ul>
+						                    <li> {{lang_strings.networkErr}}</li>
+						                </ul>
+						             </div>
+               	             
+                <ion-nav-view animation="slide-left-right">
+	                   
+                </ion-nav-view>
+ 
+ 
+            </ion-content>
+   
+        </ion-side-menu-content>
+
+  <ion-side-menu side="left">
+    <ion-content>
+      <ion-list>
+
+        <ion-item class="heading-item item item-avatar">
+           <img style="top:-8px;left:-3px" ng-src="img/logo-collapsed@2x.png">        
+        </ion-item>
+
+        <ion-item ng-repeat="project in projects" ng-click="selectLink(project)" ng-class="{active : activeLink == project.link }" class="item-icon-left" href="">
+                        <i class="{{project.icon}}"></i>
+              <h2 class="menu-text custom-font"> {{project.title}}</h2>
+        </ion-item>
+    <!--    <ion-item class="item-icon-left" href="" ng-click="identifyUser()"> <h2 class="menu-text custom-font"> test note</h2> </ion-item>        
+    -->    
+        <ion-item ng-if="currentuser" href="" class="item item-icon-left" ng-click="logout()">
+                        <i class="icon ion-log-out">  </i>
+          <h2 class="menu-text custom-font"> {{lang_strings.logout}}</h2>
+        </ion-item>
+       
+    </ion-list>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>
+
+
+
+
+
+
+
+</body>
+
+</html>
+

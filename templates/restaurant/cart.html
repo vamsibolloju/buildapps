@@ -1,0 +1,113 @@
+<ion-view title="Cart" class="feed-entries-view">
+<ion-content  class="splash" ng-init="setInits()">
+
+<div class="row">
+ <div class="col">   
+   <a class="button button-block button-positive ion-plus" ng-click="goToMenu()"> {{lang_strings.addMoreItems}} </a>
+ </div>
+ <div class="col"> 
+  <a class="button button-block button-assertive" ng-click="subTotal()"> {{lang_strings.checkout}} </a>
+  </div>
+</div>
+			<div class="list">
+	        <div class="item item-divider">
+	            {{lang_strings.total}} 
+	        </div>
+			 <div class="item item-button-right">
+{{lang_strings.subTotal}}
+			    <span class="badge badge-positive">
+			      <span ng-bind-html="curr"></span>{{total | prettyFilter:decimal:separator}}	
+			    </span>
+			  </div>
+			
+			  <div class="item item-button-right" ng-if="remove">
+{{lang_strings.voucherLess}}
+			    <span class="badge badge-positive">
+			      <span ng-bind-html="curr"></span>{{voucher_less | prettyFilter:decimal:separator}}	
+			    </span>
+			  </div>
+			  
+			  <div class="item item-button-right" ng-if="options.merchant_delivery_charges != 0">
+                    {{lang_strings.deliveryCharges}}
+
+			    <span class="badge badge-positive">
+			      <span ng-bind-html="curr"></span>{{options.merchant_delivery_charges | prettyFilter:decimal:separator}}	
+			    </span>
+			  </div>
+		
+
+		  <div class="item item-button-right">
+			  {{lang_strings.finalTotal}}
+			    <span class="badge badge-positive">
+			      <span ng-bind-html="curr"></span>{{sub_total | prettyFilter:decimal:separator}}	
+			    </span>
+			  </div>
+			  
+				  <div class="item item-divider">
+				    {{lang_strings.voucher}}
+				 </div>
+             <div class="item" style="padding:0;">
+<div class="list list-inset" ng-if="options.merchant_enabled_voucher">
+            <div ng-if="!remove">
+				  <label class="item item-input">
+				    <input type="text" placeholder="coupon" ng-model="voucher_code">
+				  </label>
+				  <button class="button button-block button-positive" ng-click="usevoucher(voucher_code)">
+	            {{lang_strings.useVoucher}}
+	           </button>
+            </div>
+           
+			  <button class="button button-block button-positive" ng-click="removeval()" ng-if="remove">
+             {{lang_strings.removeVoucher}}
+           </button>
+       	</div>
+            
+             </div>
+       
+       
+</div>
+
+       
+       
+
+    <div class="entries-list" ng-repeat="cartitem in cart">
+
+      <div class="list card entry-item">
+          
+        <div class="entry-heading item item-text-wrap">
+       
+        
+           <button class="button button-small icon ion-trash-a" style="float:right; margin-left:5px;" ng-click="delete($index)"></button>        
+           <button class="button button-small ion-edit" style="float:right; margin-left:5px;" ng-click="edit($index)"></button>        
+
+        
+          <h2 class="entry-title"> {{cartitem.qty}} {{cartitem.item.item_name}}  
+                                 <span ng-if="cartitem.cooking_ref"> ( {{cartitem.cooking_ref}} )  </span> 
+	                              {{cartitem.price.size}} 
+	       </h2>
+	       <p class="entry-author">
+	                                  <span ng-bind-html="curr"></span>
+	                                  <span ng-if="!cartitem.item.discount"> {{cartitem.price.price-cartitem.item.discount | prettyFilter:decimal:separator }} </span>
+				                         <span ng-if="cartitem.item.discount"> {{cartitem.price.price | prettyFilter:decimal:separator }} </span>
+	       </p>
+	       
+	     </div>
+	     <div class="entry-content item item-text-wrap" ng-if="cartitem.isSubs" style="padding-bottom:10px;">
+          <p class="entry-excerpt" >
+              <div  ng-repeat="subcat in cartitem.sub_item" ng-if="subcat.length">
+                 <p ng-repeat="subitem in subcat">
+                    {{subitem.qty}}   {{subitem.sub_item_name}} -- <span ng-bind-html="curr"></span>{{subitem.qty * subitem.price | prettyFilter:decimal:separator}} 				     
+                 </p>              
+              </div>   
+
+          </p>
+
+          
+          
+        </div>
+      </div>
+	</div>		
+
+
+</ion-content>
+</ion-view>

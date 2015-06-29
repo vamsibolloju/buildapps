@@ -1,0 +1,29 @@
+ <ion-modal-view >
+    <ion-header-bar>
+       <h1 class="title"> {{lang_strings.payWithStripe}}</h1>
+       <button class="button icon-left ion-close-circled" ng-click="close()"> &nbsp;  {{lang_strings.close}}</button>     
+    </ion-header-bar>
+    <ion-content >
+      <div class="list">
+  		<form stripe-form="stripeCallback">
+  			  <label class="item item-input item-stacked-label">
+			      <input ng-model="number" placeholder="Card Number" payments-format="card"  />
+			  </label>
+			  <label class="item item-input item-stacked-label">
+			      <input ng-model="expiry" placeholder="Expiration" payments-format="expiry" />
+			  </label>
+	        <label class="item item-input item-stacked-label">
+			      <input ng-keyup="setSemai(email)" ng-model="email" placeholder="email"  />
+			  </label>
+		     <label class="item item-input item-stacked-label">
+			      <input ng-model="cvc" placeholder="CVC" payments-format="cvc" />
+			  </label>
+			<div class="button-bar">
+			  <button class="button button-positive" type="submit">  {{lang_strings.submit}} </button>
+			  <button class="button button-positive" type="button" ng-click="close()"> {{lang_strings.cancel}} </button>
+			</div>
+		</form> 
+  		</div>
+    </ion-content>
+  </ion-modal-view>
+ </div> 

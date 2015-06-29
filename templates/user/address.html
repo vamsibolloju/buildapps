@@ -1,0 +1,67 @@
+<ion-view title="Address">
+  <ion-content class="padding" ng-init="setInits()">
+
+		
+		<div class="list">
+		<div class="card" ng-if="submitted && (address.locationname.$invalid || address.locstreet.$invalid || address.loccity.$invalid || address.locstate.$invalid || address.contact.$invalid ||address.zip.$invalid)">
+            <div class="item item-text-wrap errorlist">
+               <ul ng-show="submitted && address.locationname.$invalid" >
+                    <li ng-show="address.locationname.$error.required">Location name is required</li>
+                </ul>
+                 <ul ng-show="submitted && address.locstreet.$invalid" >
+                    <li ng-show="address.locstreet.$error.required">Street is required</li>
+                </ul>
+                 <ul ng-show="submitted && address.loccity.$invalid" >
+                    <li ng-show="address.loccity.$error.required">City is required</li>
+                </ul>
+                 <ul ng-show="submitted && address.locstate.$invalid" >
+                    <li ng-show="address.locstate.$error.required">State is required</li>
+                </ul>
+                 <ul ng-show="submitted && address.contact.$invalid" >
+                    <li ng-show="address.contact.$error.required">mobile number is required</li>
+                </ul>
+                  <ul ng-show="submitted && address.zip.$invalid" >
+                    <li ng-show="address.zip.$error.required">Zip code is required</li>
+                </ul>
+               
+             </div>
+        </div>
+        <form name="address" novalidate>
+		  <label class="item item-input item-floating-label" ng-class="{ 'field-error' : submitted && address.locationname.$invalid }">
+		    <span class="input-label">Location Name</span>
+		    <input type="text" name="locationname" ng-model="addr.location_name" placeholder="Location Name" required>
+		  </label>
+		  <label class="item item-input item-floating-label" ng-class="{ 'field-error' : submitted && address.locstreet.$invalid }">
+		    <span class="input-label">Street</span>
+		    <input type="text" name="locstreet" ng-model="addr.street" placeholder="Street" required>
+		  </label>
+
+		  <label class="item item-input item-floating-label" ng-class="{ 'field-error' : submitted && address.loccity.$invalid }"> 
+		    <span class="input-label">City</span>
+		    <input type="text" name="loccity" ng-model="addr.city" placeholder="City" required>
+		  </label>
+		  
+		  <label class="item item-input item-floating-label" ng-class="{ 'field-error' : submitted && address.locstate.$invalid }">
+		    <span class="input-label">State</span>
+		    <input type="text" name="locstate" ng-model="addr.state" placeholder="State" required>
+		  </label>
+		  
+		  <label class="item item-input item-floating-label" ng-class="{ 'field-error' : submitted && address.contact.$invalid }">
+		    <span class="input-label">Contact Phone</span>
+		    <input type="number" name="contact"  ng-model="addr.contact_phone" placeholder="Contact Phone" required>
+		  </label>
+
+		  <label class="item item-input item-floating-label" ng-class="{ 'field-error' : submitted &&  address.zip.$invalid }">
+		    <span class="input-label">Zip Code</span>
+		    <input type="number" name="zip" ng-model="addr.zipcode" placeholder="Zip Code" required>
+		  </label>
+		  
+		  <button ng-click="save(address.$valid)" class="button button-positive button-block">
+          Save
+        </button>
+        </form>
+
+		</div>
+
+   </ion-content> 
+</ion-view>

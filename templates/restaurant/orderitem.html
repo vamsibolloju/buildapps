@@ -1,0 +1,50 @@
+<ion-view title="Home" ng-init="setInits()">
+ <ion-content>
+ 
+ 
+  <div class="item item-divider" >
+             <span >  <b>  {{lang_strings.order}} {{orderitem.order_id}} </b> </span> 
+             </div>   
+        <a class="item" href="#" >
+                      <p>
+						         <b> {{lang_strings.status}} : </b>
+						                 <span>{{orderitem.status}}</span>  
+						    </p>
+						    
+                   <p>
+						         <b>{{lang_strings.transType}}  : </b>
+						                 <span>{{orderitem.trans_type}}</span>  
+						    </p>
+						     <p>
+						         <b> {{lang_strings.deliveryDate}} : </b>
+						                 <span>{{orderitem.delivery_date}}</span>  
+						    </p>
+						     <p>
+						         <b> {{lang_strings.deliveryTime}} : </b>
+						                 <span>{{orderitem.delivery_time}}</span>  
+						    </p>
+						     <p>
+						         <b> {{lang_strings.paymentType}} : </b>
+						                 <span>{{orderitem.payment_type}}</span>  
+						    </p>
+						     <p>
+						         <b> {{lang_strings.total}} : </b>
+						                 <span><span ng-bind-html="curr" ></span>{{orderitem.total_w_tax | priceOrderFilter :decimal:separator}}</span>  
+						    </p>    
+
+
+          </a>
+    
+    
+ <a class="item item-icon-left item-icon-right" href="" ng-repeat="indiItem in orderDetails track by $index">
+		            <i class="icon ion-compose" style="color:black"></i>
+		    	      <h2>{{indiItem.item_name}}</h2>
+			         <p><b> Item Details:</b>{{indiItem.qty}}</p>
+<p ng-repeat="individualAddons in indiaddon "><b>Addons:</b>{{individualAddons.addon_name}}
+{{individualAddons.addon_qty}}
+</p>
+		    </a>
+
+
+ </ion-content>
+</ion-view>

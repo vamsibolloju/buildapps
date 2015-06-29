@@ -1,0 +1,91 @@
+<ion-view title="Profile" ng-init="setInits()">
+    <ion-content  class="splash">
+<div class="list">
+
+     <div class="card" ng-if="submitted && (profileform.firstname.$invalid || profileform.lastname.$invalid || profileform.email.$invalid)">            
+            <div class="item item-text-wrap  errorlist">
+               <ul ng-show="submitted && profileform.firstname.$invalid" >
+                    <li>{{lang_strings.firstName}}{{lang_strings.isRequired}}</li>
+                </ul>
+               <ul ng-show="submitted && profileform.lastname.$invalid" >
+                    <li ng-show="loginvalidation.lastname.$error.required">
+                     {{lang_strings.lastName}} {{lang_strings.isRequired}}                   
+                    </li>
+                </ul>
+                <ul ng-show="submitted && profileform.email.$invalid" >
+                    <li ng-show="profileform.email.$error.required">
+                    {{lang_strings.email}}  {{lang_strings.isRequired}}                  
+
+                    </li>
+                </ul>
+             </div>
+          </div>
+
+  <div class="item item-divider">
+  <i class="ion-person"></i>   {{lang_strings.profile}}
+  </div>
+  <form name="profileform" novalidate>
+  <label class="item item-input item-floating-label">
+    <span class="input-label">{{lang_strings.firstName}} </span>
+    <input type="text" name="firstname" ng-model="user.first_name" placeholder="first name" required>
+  </label>
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">{{lang_strings.lastName}}</span>
+    <input type="text" name="lastname" ng-model="user.last_name" placeholder="last name" required>
+  </label>
+
+  <label class="item item-input item-floating-label">
+
+    <span class="input-label">  <i class="ion-email"></i>{{lang_strings.email}}  </span>
+    <input type="text" name="email" ng-model="user.email_address" placeholder="email address" required>
+  </label>
+  
+  <label class="item item-input item-floating-label">
+    <span class="input-label"> {{lang_strings.password}} </span>
+    <input type="password" ng-model="user.password" placeholder="password">
+  </label>
+  <div class="item item-divider">
+    <i class="ion-location"></i> {{lang_strings.address}}
+  </div>
+
+  <label class="item item-input item-stacked-label">
+    <span class="input-label"> {{lang_strings.locationName}}</span>
+    <input type="text" ng-model="user.location_name" placeholder="Location name">
+  </label>
+  
+  <label class="item item-input item-floating-label">
+    <span class="input-label" >{{lang_strings.street}}</span>
+    <input type="text" ng-model="user.street" placeholder="Street name">
+  </label>
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">{{lang_strings.city}}</span>
+    <input type="text" ng-model="user.city" placeholder="city name">
+  </label>
+
+  <label class="item item-input item-floating-label">
+    <span class="input-label">{{lang_strings.state}}</span>
+    <input type="text" ng-model="user.state" placeholder="state">
+  </label>
+  
+  <label class="item item-input item-floating-label">
+    <span class="input-label">{{lang_strings.zipCode}}</span>
+    <input type="text" ng-model="user.zipcode" placeholder="zip code">
+  </label>
+  
+  <label class="item item-input item-floating-label">
+    <span class="input-label"> {{lang_strings.phoneNumber}}</span>
+    <input type="text" ng-model="user.contact_phone" placeholder="Phone number ">
+  </label>
+  
+  
+	<button type="submit" class="button button-full button-positive" ng-click="updateProfile(profileform.$valid)">
+	    {{lang_strings.updateProfile}}
+	</button>
+
+  </form>
+
+</div>
+</ionic-content>
+</ion-view>

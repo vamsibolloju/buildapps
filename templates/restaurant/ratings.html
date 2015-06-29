@@ -1,0 +1,11 @@
+<div class="list">
+
+  <label ng-click="setRating(r)" class="item item-radio" ng-repeat="r in [ '1.0' , '1.5' , '2.0' , '2.5' , '3.0' , '3.5' , '4.0' , '4.5' , '5.0' ]">
+    <input type="radio" name="group" ng-checked="r == ratings.rating">
+    <div class="item-content">
+      {{r}}
+    </div>
+    <i class="radio-icon ion-checkmark"></i>
+  </label>
+
+</div>

@@ -1,0 +1,90 @@
+<ion-view title="Order" ng-init="setInits()">
+
+<ion-content>
+
+
+
+
+      <h3 class="item" style="background:#fff;color:#000;text-align:center">   
+         {{fdata.merchant_name}}  <br>         <span style="font-size:14px;color:#006c9b">{{lang_strings.orderSent}}  </span>     </h3>
+
+
+
+  <div class="item item-divider" >
+                     {{lang_strings.customerDetails}}      
+  </div> 
+
+  <a class="item item-icon-left" href="#" >
+    <i class="icon ion-ios-person-outline"></i>
+                {{lang_strings.name}}      
+    <span class="item-note">
+      {{fdata.full_name}}
+    </span>
+  </a>
+  
+  <a class="item item-icon-left" href="#" ng-if="fdata.trans_type == 'delivery'">
+    <i class="icon ion-ios-location"></i>
+
+             {{lang_strings.deliverTo}}     
+     <span class="item-note" ng-if="useraddress"> 
+       {{useraddress.location_name}} , {{useraddress.street}} , {{useraddress.city}}  
+     </span>
+
+  
+  </a>
+  
+  <div class="item item-divider">
+        {{lang_strings.orderDetails}}     
+  </div> 
+
+ <a class="item item-icon-left" href="#">
+    <i class="icon ion-ios-grid-view"></i>
+    {{lang_strings.orderNumber}}    
+    <span class="item-note">
+      {{fdata.order_id}}
+    </span>
+  </a>
+  <a class="item item-icon-left" href="#">
+    <i class="icon ion-calendar"></i>
+    {{lang_strings.orderDate}}     
+    <span class="item-note">
+      {{fdata.date_created}}
+    </span>
+  </a>
+  <a class="item item-icon-left" href="#">
+    <i class="icon ion-cash"></i>
+{{lang_strings.paymentType}}     
+    <span class="item-note">
+      <span ng-if="fdata.payment_type=='cod'">{{lang_strings.cod}}     </span>
+      <span ng-if="fdata.payment_type=='stp'">{{lang_strings.stripe}} </span>
+    </span>
+  </a>
+
+
+
+  <a class="item item-icon-left" href="#">
+    <i class="icon ion-ios-briefcase"></i>
+{{lang_strings.deliveryType}}     
+    <span class="item-note">
+      {{fdata.trans_type}}
+    </span>
+  </a>
+
+  <a class="item item-icon-left" href="#">
+    <i class="icon ion-ios-calendar"></i>
+{{lang_strings.deliveryDate}}     
+    <span class="item-note">
+      {{fdata.delivery_date}}
+    </span>
+  </a>
+   <a class="item item-icon-left" href="#">
+    <i class="icon ion-ios-clock"></i>
+{{lang_strings.deliveryTime}}     
+    <span class="item-note">
+      {{fdata.delivery_time}}
+    </span>
+  </a>
+
+
+</ion-content> 
+</ion-view>

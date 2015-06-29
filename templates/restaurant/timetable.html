@@ -1,0 +1,24 @@
+  <ion-modal-view >
+    <ion-header-bar>
+      <h1 class="title">  {{lang_strings.timeTable}} </h1>
+       <button class="button icon-left ion-close-circled" ng-click="closeModal()"> {{lang_strings.close}}</button>     
+    </ion-header-bar>
+    <ion-content>
+		<div class="list">
+
+		    
+<div class="item item-divider">
+    {{restaurant.restaurant_name}}
+  </div>		    
+		  <a class="item item-icon-left" href="" ng-repeat="day in days" ng-init="isopen = isOpen(day)">
+		    <i class="icon ion-checkmark-circled" ng-if="isopen"></i>
+		    <i class="icon ion-close-circled" ng-if="!isopen"></i> 
+		    {{day}} 
+
+		    <span class="badge badge-positive" ng-if="isopen">  {{store_open_starts[day]}} -- {{store_open_ends[day]}}  </span>
+          <span class="badge badge-positive" ng-if="!isopen">   {{lang_strings.closed}}  </span>
+ 		  
+		  </a>
+		</div>    
+		</ion-content>
+  </ion-modal-view>  

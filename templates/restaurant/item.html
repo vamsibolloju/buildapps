@@ -1,0 +1,107 @@
+ <div ng-controller="ItemCtrl" >
+ 
+ 
+  <form name="item">
+  <ion-modal-view >
+    <ion-header-bar>
+
+      <h1 class="title">   {{lang_strings.foodItem}}   </h1>
+       <button class="button icon-left ion-close-circled" ng-click="closeItem()"> &nbsp; {{lang_strings.close}}</button>     
+    </ion-header-bar>
+    <ion-content>
+      
+<div class="item item-thumbnail-left">
+			    <img style="height:100%;cursor:pointer;" ng-if="selectedItem.photo" ng-src="{{rooturl}}/upload/{{selectedItem.photo}}">
+
+			    <img style="height:100%;cursor:pointer;" ng-if="!selectedItem.photo" ng-src="img/restologos/b-1.jpg">
+             <br>             
+             <h2> {{selectedItem.item_name}}</h2>
+			    <p> {{selectedItem.item_description}} </p>
+</div>
+      
+
+						 <div class="item item-divider">
+						{{lang_strings.price}}      
+						 </div>
+		             <a class="item item-icon-left" href="" ng-repeat="price in selectedItem.prices" ng-click="setPrice(price)">
+						    <i ng-if="orderItemDetail.price.price == price.price"  class="icon ion-checkmark-circled" ></i> 
+						    <i ng-if="orderItemDetail.price.price != price.price" class="icon ion-ios-circle-outline" ></i> 
+						    {{price.size}}
+		                <span class="badge badge-positive"> <span ng-bind-html="curr"></span>{{price.price| prettyFilter:decimal:separator}} </span>
+		             </a>				  
+
+
+                  <a  class="item row">
+                     <i class="col col-5 icon ion-minus-circled placeholder-icon decr-icon row" ng-click="decrement()"></i> 
+                    <span class="col col-90"> 
+                       <label  class="item item-input">
+                          <input type="number" ng-model="orderItemDetail.qty" placeholder="Quantity" >
+						     </label>
+                     </span>
+                     <i class="col col-5 icon ion-plus-circled placeholder-icon incr-icon row" ng-click="increment()"></i> 
+                  </a> 
+
+						 <div class="item item-divider" ng-if="cooking_ref">
+						  {{lang_strings.cookingRef}}  
+						 </div>
+						 <a class="item item-icon-left" href="" ng-repeat="(id , ref) in cooking_ref" ng-click="setCookingRef(ref)">
+						    <i ng-if="orderItemDetail.cooking_ref == ref" class="icon ion-checkmark-circled" ></i> 
+						    <i ng-if="orderItemDetail.cooking_ref != ref" class="icon ion-ios-circle-outline" ></i> 
+						    {{ref}}
+						 </a>
+						 <div ng-if="selectedItem.addon_item">
+									
+									 <div ng-repeat="subcat in selectedItem.addon_item">
+											 <div class="item item-divider">
+											    {{subcat.subcat_name}} <!--{{subcat.multi_option}} {{subcat.multi_option_val}} --> 
+											 </div>
+									 
+                                  <div  ng-repeat="subitem in subcat.sub_item">
+ 											 <a class="item item-icon-left" href="" ng-click="setAddonItem(subcat.subcat_id , subitem , subcat.multi_option , subcat.multi_option_val )">
+											    <i ng-if="addonsids.indexOf(subitem.sub_item_id) !== -1" class="icon ion-checkmark-circled" ></i> 
+											    <i ng-if="addonsids.indexOf(subitem.sub_item_id) == -1" class="icon ion-ios-circle-outline" ></i> 
+											    {{subitem.sub_item_name}}
+											    <span class="badge badge-positive"> <span ng-bind-html="curr"></span>{{subitem.price | prettyFilter:decimal:separator}} </span>
+											 </a>
+
+
+                  <a  class="item row" ng-if="subcat.multi_option=='multiple'">
+                    <i class="col col-5 icon ion-minus-circled placeholder-icon decr-icon row" ng-click="decrement(subitem.sub_item_id)"></i> 
+                    <span class="col col-90"> 
+                       <label  class="item item-input">
+                          <input type="number" value="{{addonsizes[subitem.sub_item_id]}}" id="{{subitem.sub_item_id}}" placeholder="Quantity" >
+						     </label>
+                     </span>
+                    <i class="col col-5 icon ion-plus-circled placeholder-icon incr-icon row" ng-click="increment(subitem.sub_item_id)"></i> 
+                  </a> 
+
+
+                                  </div>									 
+		
+									 </div>
+						 
+						 </div>
+
+				
+
+						
+			<div class="list list-inset">
+			  <label class="item item-input">
+			    <i class="icon ion-compass placeholder-icon"></i>
+			    <input type="text" ng-model="orderItemDetail.order_notes" placeholder="Special Instructions">
+			  </label>
+			</div>               
+			  			
+    </ion-content>
+   <div class="bar bar-footer bar-positive activated" style="cursor:pointer">
+      <div class="title"  ng-click="addToCart()" >  
+	         <i class="ion-plus custom-icon"></i>  
+	         <span ng-if="cartindex == 0 || cartindex"> {{lang_strings.updateCartItem}} </span>  
+	         <span ng-if="!(cartindex == 0 || cartindex)">{{lang_strings.addtoorder}}  </span>  
+      </div>
+  </div>
+
+
+  </ion-modal-view>
+  </form>
+ </div> 

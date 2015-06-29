@@ -1,0 +1,151 @@
+<ion-view title="Home" class="category-feeds-view" >
+ <ion-content ng-init="setInits()" id="restaurantspage">
+ 
+     <ul class="list">
+      <div class="item item-divider search"> 
+        <span style="vertical-align:middle"> <span ng-if="searchrestopage" style="vertical-align:middle">  {{lang_strings.searchRestos}} <span ng-if="searchBy == 'location'"> location  </span> <span ng-if="searchBy == 'name'"> name  </span> 
+        
+        </span> </span>
+        <span style="vertical-align:middle"> <span ng-if="!searchrestopage" style="vertical-align:middle">{{lang_strings.favRestos}}  </span> </span>
+        <button  style="float:right;" class="button button-small button-assertive" ng-click="changeListType()">
+          <span ng-if="list == 'map' "> <i class="icon ion-ios-list-outline custom-icon"></i> {{lang_strings.list}}  </span> 
+          <span ng-if="list == 'list'"> <i class="icon ion-map custom-icon"></i>	 {{lang_strings.map}}  </span>   
+        </button>     
+
+      </div>
+ 
+      <div ng-if="searchrestopage">
+      <form >
+		<div class="item item-input-inset" ng-if="searchBy == 'location'">
+		        <label class="item-input-wrapper">
+                <i class="icon ion-ios-search placeholder-icon"></i>
+  			       <input ng-model="searchStr" id="searchbox" type="text" placeholder="Street , city , state"  ng-keyup="strChanged()">
+		        </label>
+		        <button type="submit" class="button button-small" ng-click="search(searchStr , delivery , pickup)">
+		         {{lang_strings.search}}   
+		        </button>
+	    </div>
+	    </form>
+	       
+      <form ng-if="searchrestopage">
+		<div class="item item-input-inset" ng-if="searchBy == 'name'">
+              <label class="item-input-wrapper">
+                <i class="icon ion-ios7-search placeholder-icon"></i>
+  			       <input ng-model="searchResto"  type="text" >
+		        </label>
+		        <button type="submit" class="button button-small" ng-click="search(searchResto , delivery , pickup )">
+                {{lang_strings.search}} 
+		        </button>
+       </div>   
+	   </form>
+   
+		<div class="item row" id="filter">
+				  <div class="col">
+				    <a class="item item-icon-left"  ng-click="setDeliveryType('delivery' , 'pickup', searchStr , cuisine)"> 
+		            <i ng-if="delivery" class="icon ion-checkmark-circled" ></i> 
+		            <i ng-if="!delivery" class="icon ion-ios-circle-outline" ></i> 
+      				                  {{lang_strings.delivery}}  
+				  </a>
+				  </div>
+				  <div class="col"> 
+				   <a  class="item item-icon-left" ng-click="setDeliveryType('pickup' , 'delivery' , searchStr , cuisine)">
+				     <i ng-if="pickup" class="icon ion-checkmark-circled" ></i>
+				     <i ng-if="!pickup" class="icon ion-ios-circle-outline" ></i>
+		  		                       {{lang_strings.takeAway}}   
+				    </a>
+				  </div>
+				  <div class="col">
+				   <a  class="item item-icon-left" ng-click="selectCuisine()">
+				                       {{cuisine.cuisine_name | uppercase}}   
+				    </a>
+				  
+<!--	<label class="item  item-select">
+    <select name="cuisines" ng-model="cuisine" ng-init="cuisine = 0"  ng-change="cuisineChanged(cuisine)" ng-options="cuisine.cuisine_id as cuisine.cuisine_name for cuisine in cuisines" >
+    <option selected="selected">                 {{lang_strings.allCusines}}  </option>    
+    </select>
+  </label>		  
+-->				  </div>
+				  
+	</div>
+	</div>
+          
+    </ul>
+
+
+<div class="list" style="position:absolute; top:40%; width:100%;">
+    <a class="item item-icon-left" href="" ng-repeat="location in locations" ng-click="setLocation(location.formatted_address)">
+        <i class="icon ion-email placeholder-icon"></i>
+        <p>  {{location.formatted_address}} </p>
+    </a>
+</div>
+
+<div ng-if="list == 'map'">
+<div ng-if="lat&&long">
+<map id="map" center="{{lat}},{{long}}" zoom="6">
+<traffic-layer>
+<marker 
+      position="{{lat}},{{long}}"
+      title="User Address"
+      visible="true"
+     icon="http://maps.google.com/mapfiles/ms/icons/green-dot.png"
+      ></marker>
+  <marker ng-repeat="rest in restaurants"
+      position="{{rest.latitude}},{{rest.longitude}}"
+      title="{{rest.restaurant_name}}"
+      draggable="true"
+      visible="true"
+      on-click="selectResto(rest)"
+      ></marker>
+      
+      <marker ng-repeat="restau in nearByRestos"
+      position="{{restau.geometry.location.k}},{{restau.geometry.location.D}}"
+      title="{{restau.name}}"
+      icon="http://maps.google.com/mapfiles/ms/icons/blue-dot.png"
+      draggable="true"
+      visible="true"
+      on-click="nearResto(restau)"
+      ></marker>
+      </traffic-layer>  
+</map>
+</div>
+
+</div>
+
+
+<div ng-if="list =='list'">
+    <div class="list category-feeds">
+      <a  ng-repeat="restaurant in restaurants | orderBy:'distance'" class="item item-icon-right" href="" ng-click="gotoRestaurant(restaurant.restaurant_slug)">
+         <img ng-if="restaurant.merchant_logo" class="thumbnail" ng-src="{{rooturl}}/upload/{{restaurant.merchant_logo}}">
+         <img ng-if="!restaurant.merchant_logo" class="thumbnail" ng-src="img/thumbnail-mini.png">
+       
+          <span class="title">{{restaurant.restaurant_name}}</span>
+           
+          <p class="description"> {{restaurant.street}} </p>
+            <p class="description" > 
+                   <span class="custom-badge" ng-if="restaurant.isOpen">                 {{lang_strings.open}}  </span>
+                   <span class="custom-badge closed-badge" ng-if="!restaurant.isOpen">                 {{lang_strings.closed}}  </span>
+          <span class="custom-badge delivery-badge" ng-if="restaurant.service==2 || restaurant.service==1">                 {{lang_strings.delivery}}  </span> 
+          <span class="custom-badge delivery-badge" ng-if="restaurant.service==3 || restaurant.service==1">                 {{lang_strings.takeAway}}  </span>   
+          <span ng-if="restaurant.distance">{{restaurant.distance | roundDistance}}                 {{lang_strings.km}}  </span>
+          </p>
+          <p class="description">  <span  ng-repeat="cuisine in restaurant.cuisines">
+                 {{cuisine.cuisine_name}} <span ng-if="restaurant.cuisines.length != $index+1">,</span>
+            </span></p>         
+        <i class="icon ion-arrow-right-c"></i>
+      </a>
+    </div>
+
+
+
+<div class="card" ng-if="noResto">
+  <div class="item item-text-wrap">
+ {{lang_strings.noRestos}}
+  </div>
+</div>
+
+</div>
+			
+   
+
+ </ion-content>
+</ion-view>

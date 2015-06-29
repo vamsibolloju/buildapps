@@ -1,0 +1,276 @@
+/* Empty. Add your own CSS if you like */
+
+@font-face {
+    font-family: 'opensans-Llight';
+    src: url('/fonts/alte-haas-grotesk/AlteHaasGroteskRegular.ttf'); 
+}
+@font-face {
+    font-family: 'AlteHaasGroteskBold';
+    src: url('/fonts/libre-baskerville/LibreBaskerville-Bold.ttf'); 
+}
+body{
+ font-family : 'opensans-Llight';	
+}
+
+/**********header***************/
+ .bar.bar-header {
+ background-color : #006C9B;
+ border-color :  #025A80;
+ color: #fff;
+}
+
+.bar.bar-header .title{
+  color: #fff;
+}
+
+
+/*****login button**********/
+
+
+#header-logo{
+    height: 170px;
+    width: 100%;
+    background-image: url("../img/Mobyeat-logo.png");	
+    background-repeat: no-repeat;
+        background-position: center; 
+
+	}
+
+.bar-header .button , .bar-header .button.activated	 {
+ background-color : #025A80;
+ border-color :  #025A80;
+ color: #fff;
+}
+
+
+.bar-header .button,
+.bar-assertive .button:active {
+ background-color : #025A80;
+ border-color :  #025A80;
+ color: #fff;
+}
+
+.walkthrough-view ion-content:before, .login-view ion-content:before, .signup-view ion-content:before, .forgot-password-view ion-content:before{
+   background-color: #fff; 
+   background-image: none;  	
+}
+
+
+/*********login page button*******/
+.bar.bar-positive,
+.button.button-positive ,
+.button.button-full.button-positive,
+.bar-positive .button{
+ background-color :#00ACCB;
+ border-color :  #028da6;
+ }
+
+
+.facebook-button{
+  background-color:#006C9B;  
+  color: white;
+}
+
+.facebook-icon{
+  padding-right: 11px;
+  padding-left: 11px;  
+  background-color: white;
+  border-radius:5px;
+  float: left;
+}
+
+
+
+
+.button.button-assertive.active, .button.button-assertive.activated{
+	 background-color : #89c53e;
+	}
+
+ion-side-menu ion-content {
+    opacity: 1;
+}
+
+ion-side-menu .heading-item {
+    opacity: 1;
+    margin-top: 30px;
+    padding-top: 75px;
+    padding-bottom: 60px;
+}
+i{
+	color: #006c9b;
+}
+/*******for sidebar border color**********/
+
+ion-side-menu ion-item.item{
+	border-color: grey;
+	}
+
+	/************for top header in side menu*******/
+ion-side-menu .heading-item img {
+	border:0;
+}
+
+
+/**************** side menu butons font color**********************/
+ion-side-menu ion-item.item .menu-text {
+font-family:'AlteHaasGroteskBold'; 
+	}
+	/***********side menu image center*********/
+	ion-side-menu .heading-item img {
+       margin-left: 26%;		
+		}
+	
+	
+	/****************menu******/
+.wordpress-view .post-heading {
+background-color: #fff;
+border-color: #000;
+}
+
+.button.button-assertive{
+		 background-color : #89c53e;
+		 font-size: 14px;
+		 border-color: #89c53e;
+	}
+	
+	.search{
+  		   background-color: #2b2b2b;
+  		    color: #fff;
+  		    border:1px solid #2b2b2b;
+	 }
+		
+	.badge.badge-positive{
+     		 background-color : #00ACCB;
+	}
+	
+	.icon.ion-checkmark-circled{
+     color: #00ACCB;		
+	}
+	
+	.icon.ion-close-circled{
+     color: #ef4e3a;		
+	}
+   .ion-ios-circle-outline{
+     color: #00ACCB;		
+   
+   }
+	
+	.feed-entries-view .entry-heading{
+      /*background-color: #7FE8E3;*/	
+       background-color: #fff;	
+		}
+		.feed-entries-view .entry-heading .entry-title {
+            color: #000;			
+			}
+			
+		.icon.ion-arrow-right-c{
+           color: #006C9B;			
+			}	
+	
+	.wordpress-view .post-heading .post-title{
+         color: #000;		
+		}
+		
+		.custom-font{
+		    font-family : 'opensans-Llight';		
+		}
+		 .custom-icon{
+       color:#fff;		 	
+		 	}
+		 
+		 .errorlist{
+          background-color: #ef4e3a;		 
+          color: white;
+		 }
+		 
+
+.item-note{
+    color: black;
+}
+
+.incr-icon , .decr-icon{
+  cursor: pointer;
+  font-size: 28px;
+  margin-top: 6px;
+  margin-left: -6px;    
+}
+
+.item-avatar > img:first-child{
+max-width: 50px;
+height: 200px;
+border-radius : 0;
+}
+.walkthrough-view ion-content:before, .login-view ion-content:before, .signup-view ion-content:before, .forgot-password-view ion-content:before {
+ opacity: 1;
+}
+
+
+map {
+    height:480px;
+    width:100%;
+}
+
+@media screen and (orientation:portrait) {
+map {
+    height:880px;
+    width:100%;
+}
+}
+ @media screen and (orientation:landscape) {
+map {
+    height:500px;
+    width:100%;
+}
+
+}
+
+
+/* restaurants page */
+
+.custom-badge{
+  color: white;
+  background-color: #89c53e;
+  padding: 4px;
+  font-size: 12px;
+  border-radius : 6px;
+  margin-right: 5px;
+
+}
+.custom-value-badge{
+	padding: 1px 4px;
+	border-radius : 4px;
+   font-size: 10px;	
+   float: right;	
+	}
+
+.delivery-badge{
+   background-color: #bebebe;
+}
+
+.closed-badge{
+   background-color: grey;
+}
+
+
+
+#restaurantspage .list{
+ margin-bottom: 0;
+}
+
+#restaurantspage .thumbnail{
+  width: 80px;
+  height: 70px;
+}
+
+#restaurantspage .item.item-icon-right{
+  padding-left: 100px;
+}
+
+#restaurantspage #filter .item{
+   border-width: 0;  
+ }
+
+
+.delivery-type i{
+  cursor: pointer;
+}

@@ -1,0 +1,35 @@
+<ion-view title="Address List">
+
+  <ion-content class="padding" ng-init="setInits()">
+			<a ui-sref="addaddress" class="button button-positive button-block">
+			  Add New Address
+			</a>
+			
+
+<div class="list list-inset">
+    <div class="item"   ng-repeat="address in addresslist">
+      {{address.location_name}}
+       <span style="float:right;">
+        <button ng-click="editAddress(address)" class="button button-small button-positive">
+          <i class="icon ion-edit custom-icon"></i>
+        </button>
+        <button class="button button-small button-positive" ng-click="alert('dbs')">
+          <i class="icon ion-trash-a custom-icon"></i>
+        </button>
+
+        <button class="button button-small button-positive" ng-if="default_address.address_id == address.address_id">
+          <i class="icon ion-checkmark-round custom-icon"></i>
+        </button>
+        <button class="button button-small button-positive" ng-if="default_address.address_id != address.address_id" ng-click="changeAddress(address)">
+          <i class="icon ion-close custom-icon"></i>
+        </button>
+       </span> 
+    </div>
+</div>
+
+			<button  ng-click="setDefaultAddress()" class="button button-positive button-block">
+			  Set Default Address
+			</button>
+
+   </ion-content> 
+</ion-view>

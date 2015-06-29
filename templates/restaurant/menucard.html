@@ -1,0 +1,81 @@
+<ion-view title="Home" >
+<ion-content ng-init="setInits()">
+
+<div class="list">
+ <div ng-if="!menucard.length">
+          <div class="card">
+            <div class="item item-text-wrap  errorlist">
+               <ul>
+                    <li> dsverhrejtrtr  </li>
+               </ul>
+             </div>
+          </div>
+ </div>  
+ 
+ 
+ <div ng-repeat="menu in menucard" ng-if="menucard.length">
+
+	  <div class="item item-divider">
+	    {{menu.menu_name}} 
+	  </div>
+ 
+    <div  ng-repeat="cat in menu.cats"  ng-if="cat.items.length  && menu.isCats">  
+		  <a class="item item-icon-left" href="" ng-class="{ active : catnum == cat.cat_id }"
+				 ng-click="openCat(cat.cat_id)">
+		    <i class="icon ion-bookmark"></i>
+		    {{cat.category_name}}
+		    <span class="badge"> 
+		        <i ng-if="catnum != cat.cat_id" style="color:black;" class="icon ion-arrow-right-b" ></i>
+	 			  <i ng-if="catnum == cat.cat_id" class="icon ion-arrow-down-b" ></i>
+		      </span>
+		  </a>
+		  
+		  
+		  <div class="list" ng-if="catnum == cat.cat_id">
+				  <a class="item item-icon-left" href="" ng-repeat="item in cat.items" ng-click="setItem(item.item_id);" ng-if="(item.category).indexOf(cat.cat_id) !== -1">
+				    <i class="icon ion-fork"></i>
+				    {{item.item_name}}
+				    <span class="badge badge-positive"> <span ng-bind-html="curr"></span>{{item.price | priceFilter:decimal:separator}} </span>
+				  </a>
+	     </div>
+     </div>
+    <div  ng-if="!menu.isCats"> 
+                   <div class="card">
+            <div class="item item-text-wrap  errorlist">
+               <ul>
+                    <li> No categories in the menu  </li>
+               </ul>
+             </div>
+          </div>
+
+    </div> 
+	      
+     
+     
+ </div>  
+		<div class="list">
+		
+		<div class="card" ng-if="!menucard">
+		            <div class="item item-text-wrap errorlist">
+{{lang_strings.noMenuCard}}
+      </div>
+		</div>
+		
+		</div>
+
+</div>
+
+
+
+</ion-content>
+</ion-view>
+
+<div class="bar bar-footer bar-positive activated" style="cursor:pointer">
+  <div class="title" style="text-align : left;"  ng-click="openCart()" >  {{lang_strings.yourOrder}}: {{itemsCount}} {{lang_strings.items}} - <span ng-bind-html="curr"></span>{{total}}   </div>
+</div>
+
+
+
+
+
+
