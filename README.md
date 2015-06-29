@@ -1,0 +1,2 @@
+# buildapps
+phonegap build applications
